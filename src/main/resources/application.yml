@@ -7,3 +7,9 @@ spring:
       database: ipCheck
       port: 27017
       host: localhost
+
+integration:
+  telegram:
+    url: https://api.telegram.org
+    token: secret
+
