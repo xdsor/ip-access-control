@@ -1,0 +1,1 @@
+[![codecov](https://codecov.io/github/xdsor/ip-access-control/graph/badge.svg?token=DQ72XBZV3Z)](https://codecov.io/github/xdsor/ip-access-control)
