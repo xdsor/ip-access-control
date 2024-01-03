@@ -52,6 +52,7 @@ dependencies {
     testImplementation("io.projectreactor:reactor-test")
     testImplementation("org.springframework.security:spring-security-test")
     testImplementation("org.mockito:mockito-inline:5.2.0")
+    testImplementation("com.squareup.okhttp3:mockwebserver:4.12.0")
 
 }
 
