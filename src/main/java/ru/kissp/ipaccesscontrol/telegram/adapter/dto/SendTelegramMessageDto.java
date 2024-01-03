@@ -1,4 +1,4 @@
-package ru.kissp.ipaccesscontrol.telegram.adapter;
+package ru.kissp.ipaccesscontrol.telegram.adapter.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;

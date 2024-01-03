@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
+import ru.kissp.ipaccesscontrol.telegram.adapter.dto.SendTelegramMessageDto;
 import ru.kissp.ipaccesscontrol.telegram.port.TelegramApiPort;
 
 @Component
@@ -34,6 +35,6 @@ public class TelegramApiAdapter implements TelegramApiPort {
                 ))
                 .retrieve()
                 .bodyToMono(String.class)
-                .doOnError(err -> logger.error("Telegram API error {}", err));
+                .doOnError(err -> logger.error("Telegram API error " + err));
     }
 }
