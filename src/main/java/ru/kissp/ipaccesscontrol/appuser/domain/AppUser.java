@@ -2,7 +2,6 @@ package ru.kissp.ipaccesscontrol.appuser.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -16,6 +15,7 @@ public class AppUser {
     private final String userComment;
     private final String name;
     private final Boolean isActive;
+    private final Boolean isApproved;
 
     public AppUser getActivatedUser() {
         return new AppUser(
@@ -23,6 +23,7 @@ public class AppUser {
                 this.getTelegramId(),
                 this.getUserComment(),
                 this.getName(),
+                true,
                 true
         );
     }

@@ -64,7 +64,7 @@ public class AppUserUseCaseTest {
 
     @Test
     public void should_activate_user() {
-        AppUser appUser = TestDataGenerator.createAppUser(false);
+        AppUser appUser = TestDataGenerator.createUnapprovedUser();
 
         when(appUserRepository.findById(appUser.getId())).thenReturn(Mono.just(appUser));
         when(appUserRepository.save(appUser.getActivatedUser())).thenReturn(Mono.just(appUser.getActivatedUser()));

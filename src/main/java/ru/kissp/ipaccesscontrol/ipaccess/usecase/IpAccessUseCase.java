@@ -31,6 +31,7 @@ public class IpAccessUseCase implements IpAccessPort {
     private final TelegramPort telegramPort;
 
     @Override
+    @CrudMethod
     public Flux<IpAccessDto> getAllIpAccess() {
         return ipAccessRepository.findAll()
                 .flatMap(ipAccess -> appUserRepository.findById(ipAccess.getIssuedFor())

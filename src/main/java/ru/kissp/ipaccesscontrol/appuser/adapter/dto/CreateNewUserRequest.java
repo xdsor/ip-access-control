@@ -23,6 +23,7 @@ public class CreateNewUserRequest {
                 this.telegramId,
                 this.userComment,
                 this.name,
+                false,
                 false
         );
     }
