@@ -206,13 +206,13 @@ public class IpAccessHandlerTest {
                 Mono.just(TestDataGenerator.createIpAccess("test"))
         );
 
-        webTestClient.put()
+        webTestClient.patch()
                 .uri("/ip/testId")
                 .contentType(MediaType.APPLICATION_JSON)
                 .bodyValue(request)
                 .accept(MediaType.APPLICATION_JSON)
                 .exchange()
-                .expectStatus().isOk();
+                .expectStatus().isNoContent();
 
         verify(ipAccessPort).modifyIpAccessInfo(any(), eq("testId"));
     }
@@ -250,7 +250,7 @@ public class IpAccessHandlerTest {
                 Mono.error(new IpAccessNotFoundException())
         );
 
-        webTestClient.put()
+        webTestClient.patch()
                 .uri("/ip/testId")
                 .contentType(MediaType.APPLICATION_JSON)
                 .bodyValue(request)

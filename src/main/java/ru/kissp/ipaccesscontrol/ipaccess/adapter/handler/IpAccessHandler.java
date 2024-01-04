@@ -49,7 +49,7 @@ public class IpAccessHandler {
         return serverRequest.bodyToMono(ModifyIpAccessDto.class)
                 .doOnNext(this::validate)
                 .flatMap(modifyIpAccessDto -> ipAccessPort.modifyIpAccessInfo(modifyIpAccessDto, serverRequest.pathVariable("id")))
-                .flatMap(updatedEntity -> ServerResponse.ok().build())
+                .flatMap(updatedEntity -> ServerResponse.noContent().build())
                 .onErrorResume(exceptionHandler);
     }
 
