@@ -17,6 +17,8 @@ import ru.kissp.ipaccesscontrol.ipaccess.port.IpAccessPort;
 
 import java.net.URI;
 
+import static ru.kissp.ipaccesscontrol.common.utils.ValidationUtils.validate;
+
 @Configuration
 @RequiredArgsConstructor
 public class IpAccessHandler {
@@ -36,7 +38,7 @@ public class IpAccessHandler {
 
     public Mono<ServerResponse> addNewIp(ServerRequest serverRequest) {
         return serverRequest.bodyToMono(CreateIpAccessDto.class)
-                .doOnNext(this::validate)
+                .doOnNext(createIpAccessDto -> validate(validator, createIpAccessDto))
                 .doOnNext(createIpAccessDto -> logger.info("Got create new IP request {}", createIpAccessDto))
                 .flatMap(ipAccessPort::createNewIpAccess)
                 .flatMap(savedEntity -> ServerResponse.created(
@@ -47,7 +49,7 @@ public class IpAccessHandler {
 
     public Mono<ServerResponse> modifyIpInfo(ServerRequest serverRequest) {
         return serverRequest.bodyToMono(ModifyIpAccessDto.class)
-                .doOnNext(this::validate)
+                .doOnNext(modifyIpAccessDto -> validate(validator, modifyIpAccessDto))
                 .flatMap(modifyIpAccessDto -> ipAccessPort.modifyIpAccessInfo(modifyIpAccessDto, serverRequest.pathVariable("id")))
                 .flatMap(updatedEntity -> ServerResponse.noContent().build())
                 .onErrorResume(exceptionHandler);
@@ -64,12 +66,5 @@ public class IpAccessHandler {
             return ipAccessPort.addIpAccessForUserByTelegramId(Long.valueOf(telegramId), ip);
         }).flatMap(updatedEntity -> ServerResponse.ok().build())
                 .onErrorResume(exceptionHandler);
-    }
-
-    private void validate(Object object) {
-        var errors = validator.validateObject(object);
-        if (errors.hasErrors()) {
-            throw new ServerWebInputException(errors.getAllErrors().toString());
-        }
     }
 }

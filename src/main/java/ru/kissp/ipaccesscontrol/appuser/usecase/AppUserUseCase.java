@@ -6,11 +6,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;
 import ru.kissp.ipaccesscontrol.appuser.adapter.dto.CreateNewUserRequest;
+import ru.kissp.ipaccesscontrol.appuser.adapter.dto.UpdateUserRequest;
 import ru.kissp.ipaccesscontrol.appuser.domain.AppUser;
 import ru.kissp.ipaccesscontrol.appuser.port.AppUserPort;
 import ru.kissp.ipaccesscontrol.appuser.repository.AppUserRepository;
 import ru.kissp.ipaccesscontrol.appuser.usecase.exceptions.UserAlreadyExistsException;
 import ru.kissp.ipaccesscontrol.appuser.usecase.exceptions.UserNotFoundException;
+import ru.kissp.ipaccesscontrol.common.annotations.CrudMethod;
 import ru.kissp.ipaccesscontrol.telegram.port.TelegramPort;
 
 
@@ -50,5 +52,15 @@ public class AppUserUseCase implements AppUserPort {
                             .then(Mono.just(savedUser));
                 }))
                 .doOnError(UserNotFoundException.class::isInstance, err -> logger.error("User with id {} not found", userId));
+    }
+
+    @Override
+    @CrudMethod
+    public Mono<AppUser> updateUser(UpdateUserRequest updateUserRequest, String userId) {
+        logger.info("Got request for update user by id {} {}", userId, updateUserRequest);
+        return appUserRepository.findById(userId)
+            .switchIfEmpty(Mono.error(new UserNotFoundException()))
+            .flatMap(appUser -> appUserRepository.save(updateUserRequest.updateDomainUser(appUser)))
+            .doOnError(UserNotFoundException.class::isInstance, err -> logger.error("User with id {} not found", userId));
     }
 }

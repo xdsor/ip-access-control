@@ -34,6 +34,7 @@ public class RouterConfiguration {
                 )
                 .path("/users", builder -> builder
                         .POST("/{id}/activate", appUserHandler::activateUser)
+                        .PATCH("/{id}", appUserHandler::updateUser)
                         .PUT(appUserHandler::createNewUser)
                 )
                 .build();
