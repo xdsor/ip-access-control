@@ -1,0 +1,140 @@
+<mxfile host="Electron" modified="2024-01-04T11:25:51.782Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/22.1.16 Chrome/120.0.6099.109 Electron/28.1.0 Safari/537.36" etag="XIburVCnH_pges-s9RH9" version="22.1.16" type="device">
+  <diagram name="Page-1" id="8eWHCo9WhFgusVVfBHuc">
+    <mxGraphModel dx="1383" dy="809" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="paskMDU3khhNmLRPxO3I-12" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;curved=0;" edge="1" parent="1" target="paskMDU3khhNmLRPxO3I-6">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="200.00393939393928" y="270" as="sourcePoint" />
+            <mxPoint x="410" y="270" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="380" y="270" />
+              <mxPoint x="380" y="270" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="paskMDU3khhNmLRPxO3I-13" value="GET /activate/{telegramId}" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="paskMDU3khhNmLRPxO3I-12">
+          <mxGeometry x="-0.0659" relative="1" as="geometry">
+            <mxPoint y="-10" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="paskMDU3khhNmLRPxO3I-1" value="user" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};" vertex="1" parent="1">
+          <mxGeometry x="150" y="190" width="100" height="330" as="geometry" />
+        </mxCell>
+        <mxCell id="paskMDU3khhNmLRPxO3I-2" value="ip-access-control" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};" vertex="1" parent="1">
+          <mxGeometry x="690" y="190" width="100" height="330" as="geometry" />
+        </mxCell>
+        <mxCell id="paskMDU3khhNmLRPxO3I-16" value="" style="html=1;points=[[0,0,0,0,5],[0,1,0,0,-5],[1,0,0,0,5],[1,1,0,0,-5]];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};" vertex="1" parent="paskMDU3khhNmLRPxO3I-2">
+          <mxGeometry x="45" y="90" width="10" height="220" as="geometry" />
+        </mxCell>
+        <mxCell id="paskMDU3khhNmLRPxO3I-14" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;curved=0;" edge="1" parent="1" source="paskMDU3khhNmLRPxO3I-6" target="paskMDU3khhNmLRPxO3I-16">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="425.0039393939393" y="290" as="sourcePoint" />
+            <mxPoint x="680" y="290" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="520" y="290" />
+              <mxPoint x="520" y="290" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="paskMDU3khhNmLRPxO3I-15" value="includes X-Real-IP header to the request" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="paskMDU3khhNmLRPxO3I-14">
+          <mxGeometry x="0.0275" y="-1" relative="1" as="geometry">
+            <mxPoint y="-11" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="paskMDU3khhNmLRPxO3I-6" value="gateway" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};" vertex="1" parent="1">
+          <mxGeometry x="410" y="190" width="100" height="330" as="geometry" />
+        </mxCell>
+        <mxCell id="paskMDU3khhNmLRPxO3I-17" value="DB" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};" vertex="1" parent="1">
+          <mxGeometry x="980" y="190" width="100" height="330" as="geometry" />
+        </mxCell>
+        <mxCell id="paskMDU3khhNmLRPxO3I-19" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;curved=0;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="745" y="301.03703703703695" as="sourcePoint" />
+            <mxPoint x="1029.5" y="301.03703703703695" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="950" y="301" />
+              <mxPoint x="950" y="301" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="paskMDU3khhNmLRPxO3I-20" value="finds user by telegram id" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="paskMDU3khhNmLRPxO3I-19">
+          <mxGeometry x="-0.0775" y="1" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="paskMDU3khhNmLRPxO3I-23" value="&amp;nbsp;checks if user active" style="html=1;align=left;spacingLeft=2;endArrow=block;rounded=0;edgeStyle=orthogonalEdgeStyle;curved=0;rounded=0;" edge="1" target="paskMDU3khhNmLRPxO3I-16" parent="1">
+          <mxGeometry x="-0.0246" relative="1" as="geometry">
+            <mxPoint x="745.177419354839" y="325.9999999999999" as="sourcePoint" />
+            <Array as="points">
+              <mxPoint x="745" y="329" />
+              <mxPoint x="805" y="329" />
+              <mxPoint x="805" y="369" />
+            </Array>
+            <mxPoint x="745" y="376" as="targetPoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="paskMDU3khhNmLRPxO3I-24" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;curved=0;" edge="1" parent="1" source="paskMDU3khhNmLRPxO3I-16" target="paskMDU3khhNmLRPxO3I-17">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="950" y="400" />
+              <mxPoint x="950" y="400" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="paskMDU3khhNmLRPxO3I-25" value="if user active, finds active ip access records" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="paskMDU3khhNmLRPxO3I-24">
+          <mxGeometry x="-0.0953" relative="1" as="geometry">
+            <mxPoint x="8" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="paskMDU3khhNmLRPxO3I-26" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;curved=0;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="745" y="437" as="sourcePoint" />
+            <mxPoint x="1029.5" y="437" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="950" y="437" />
+              <mxPoint x="950" y="437" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="paskMDU3khhNmLRPxO3I-27" value="if no active ip access, creates new one" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="paskMDU3khhNmLRPxO3I-26">
+          <mxGeometry x="-0.1333" relative="1" as="geometry">
+            <mxPoint x="20" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="paskMDU3khhNmLRPxO3I-29" value="ip-access-contol-bot" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};" vertex="1" parent="1">
+          <mxGeometry x="1200" y="190" width="100" height="330" as="geometry" />
+        </mxCell>
+        <mxCell id="paskMDU3khhNmLRPxO3I-30" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;curved=0;" edge="1" parent="1" target="paskMDU3khhNmLRPxO3I-29">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="745" y="472.9999999999999" as="sourcePoint" />
+            <mxPoint x="1249.5" y="473" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="745" y="474" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="paskMDU3khhNmLRPxO3I-31" value="notifies user that access has been granted&amp;nbsp;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="paskMDU3khhNmLRPxO3I-30">
+          <mxGeometry x="-0.5854" y="1" relative="1" as="geometry">
+            <mxPoint x="35" y="-8" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="paskMDU3khhNmLRPxO3I-32" value="200 OK" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;curved=0;rounded=0;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="735.0000000000002" y="490" as="sourcePoint" />
+            <mxPoint x="459.8750000000002" y="490" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="paskMDU3khhNmLRPxO3I-33" value="200 OK" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;curved=0;rounded=0;" edge="1" parent="1" target="paskMDU3khhNmLRPxO3I-1">
+          <mxGeometry x="-0.0013" relative="1" as="geometry">
+            <mxPoint x="460" y="500" as="sourcePoint" />
+            <mxPoint x="380" y="500" as="targetPoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
