@@ -29,10 +29,11 @@ public class RouterConfiguration {
                 .GET("/activate/{telegramId}", ipAccessHandler::addIpForUserByTelegramId)
                 .path("/ip", builder -> builder
                         .GET(accept(APPLICATION_JSON), ipAccessHandler::getAllIpAccess)
-                        .PUT("/{id}", ipAccessHandler::modifyIpInfo)
+                        .PATCH("/{id}", ipAccessHandler::modifyIpInfo)
                         .PUT(ipAccessHandler::addNewIp)
                 )
                 .path("/users", builder -> builder
+                        .PATCH("/{id}", appUserHandler::updateUser)
                         .POST("/{id}/activate", appUserHandler::activateUser)
                         .PUT(appUserHandler::createNewUser)
                 )
