@@ -14,7 +14,6 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.reactive.server.WebTestClient;
 import reactor.core.publisher.Mono;
 import ru.kissp.ipaccesscontrol.appuser.adapter.dto.CreateNewUserRequest;
-import ru.kissp.ipaccesscontrol.appuser.adapter.handler.AppUserHandler;
 import ru.kissp.ipaccesscontrol.appuser.port.AppUserPort;
 import ru.kissp.ipaccesscontrol.common.config.RouterConfiguration;
 import ru.kissp.ipaccesscontrol.ipaccess.adapter.handler.IpAccessHandler;
@@ -56,12 +55,12 @@ public class AppUserHandlerTest {
         var request = TestDataGenerator.createNewUserRequest();
         var requestBody = objectMapper.writeValueAsString(request);
         when(appUserPort.createUser(any(CreateNewUserRequest.class))).thenReturn(Mono.just(TestDataGenerator.createAppUser()));
-        webTestClient.post()
+        webTestClient.put()
                 .uri("/users")
                 .contentType(MediaType.APPLICATION_JSON)
                 .bodyValue(requestBody)
                 .exchange()
-                .expectStatus().isOk()
+                .expectStatus().isCreated()
                 .expectBody()
                 .isEmpty();
 
