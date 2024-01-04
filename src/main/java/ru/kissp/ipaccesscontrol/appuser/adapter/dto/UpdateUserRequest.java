@@ -17,9 +17,9 @@ public class UpdateUserRequest {
         return new AppUser(
             appUser.getId(),
             appUser.getTelegramId(),
-            this.userComment,
-            this.name,
-            this.isActive
+            this.userComment == null ? appUser.getUserComment() : this.userComment,
+            this.name == null ? appUser.getName() : this.name,
+            this.isActive == null ? appUser.getIsActive() : this.isActive
         );
     }
 }

@@ -116,6 +116,27 @@ public class AppUserUseCaseTest {
     }
 
     @Test
+    public void should_partially_update_user() {
+        var appUser = TestDataGenerator.createAppUser();
+        var newUserIsActive = false;
+        var userArgumentCaptor = ArgumentCaptor.forClass(AppUser.class);
+
+        when(appUserRepository.findById(appUser.getId())).thenReturn(Mono.just(appUser));
+        when(appUserRepository.save(userArgumentCaptor.capture())).thenReturn(Mono.just(appUser));
+
+        StepVerifier.create(appUserUseCase.updateUser(
+            new UpdateUserRequest(null, null, newUserIsActive), appUser.getId())
+        ).expectNext(appUser).verifyComplete();
+
+        assertNotNull(userArgumentCaptor.getValue());
+        var capturedUser = userArgumentCaptor.getValue();
+
+        assertEquals(appUser.getName(), capturedUser.getName());
+        assertEquals(appUser.getUserComment(), capturedUser.getUserComment());
+        assertEquals(newUserIsActive, capturedUser.getIsActive());
+    }
+
+    @Test
     public void should_throw_error_if_user_not_found_on_update_user() {
         var appUser = TestDataGenerator.createAppUser();
 
