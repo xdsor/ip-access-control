@@ -10,21 +10,34 @@ import java.util.UUID;
 public class TestDataGenerator {
     public static AppUser createAppUser() {
         return new AppUser(
-                UUID.randomUUID().toString(),
-                1234567890L,
-                "Hi, it is your best friend, I want to join your party!",
-                "Oleg",
-                true
+            UUID.randomUUID().toString(),
+            1234567890L,
+            "Hi, it is your best friend, I want to join your party!",
+            "Oleg",
+            true,
+            true
         );
     }
 
     public static AppUser createAppUser(boolean active) {
         return new AppUser(
-                "testId",
-                1234567890L,
-                "Hi, it is your best friend, I want to join your party!",
-                "Oleg",
-                active
+            "testId",
+            1234567890L,
+            "Hi, it is your best friend, I want to join your party!",
+            "Oleg",
+            active,
+            true
+        );
+    }
+
+    public static AppUser createUnapprovedUser() {
+        return new AppUser(
+            UUID.randomUUID().toString(),
+            1234567890L,
+            "Hi, it is your best friend, I want to join your party!",
+            "Oleg",
+            false,
+            false
         );
     }
 
