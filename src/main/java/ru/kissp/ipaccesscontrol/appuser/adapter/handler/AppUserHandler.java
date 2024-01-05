@@ -45,4 +45,17 @@ public class AppUserHandler {
             .flatMap(updatedUser -> ServerResponse.noContent().build())
             .switchIfEmpty(Mono.error(new ServerWebInputException("No request body")));
     }
+
+    public Mono<ServerResponse> getAllUsers(ServerRequest serverRequest) {
+        return appUserPort.getAllUsers()
+            .collectList()
+            .flatMap(users -> ServerResponse.ok().bodyValue(users));
+    }
+
+    public Mono<ServerResponse> getUserById(ServerRequest serverRequest) {
+        return Mono.just(serverRequest.pathVariable("id"))
+            .flatMap(appUserPort::getUserById)
+            .flatMap(user -> ServerResponse.ok().bodyValue(user))
+            .switchIfEmpty(ServerResponse.notFound().build());
+    }
 }

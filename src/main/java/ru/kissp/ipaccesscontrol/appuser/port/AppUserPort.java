@@ -1,5 +1,6 @@
 package ru.kissp.ipaccesscontrol.appuser.port;
 
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import ru.kissp.ipaccesscontrol.appuser.adapter.dto.CreateNewUserRequest;
 import ru.kissp.ipaccesscontrol.appuser.adapter.dto.UpdateUserRequest;
@@ -9,4 +10,6 @@ public interface AppUserPort {
     Mono<AppUser> createUser(CreateNewUserRequest createNewUserRequest);
     Mono<AppUser> activateUser(String userId);
     Mono<AppUser> updateUser(UpdateUserRequest updateUserRequest, String userId);
+    Mono<AppUser> getUserById(String userId);
+    Flux<AppUser> getAllUsers();
 }
