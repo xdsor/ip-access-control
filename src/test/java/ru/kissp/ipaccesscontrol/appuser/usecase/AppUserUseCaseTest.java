@@ -13,6 +13,7 @@ import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
 import ru.kissp.ipaccesscontrol.appuser.adapter.dto.CreateNewUserRequest;
 import ru.kissp.ipaccesscontrol.appuser.adapter.dto.UpdateUserRequest;
+import ru.kissp.ipaccesscontrol.appuser.adapter.dto.UserDto;
 import ru.kissp.ipaccesscontrol.appuser.domain.AppUser;
 import ru.kissp.ipaccesscontrol.appuser.repository.AppUserRepository;
 import ru.kissp.ipaccesscontrol.appuser.usecase.exceptions.UserAlreadyExistsException;
@@ -157,7 +158,7 @@ public class AppUserUseCaseTest {
         when(appUserRepository.findById(appUser.getId())).thenReturn(Mono.just(appUser));
 
         StepVerifier.create(appUserUseCase.getUserById(appUser.getId()))
-                .expectNext(appUser).verifyComplete();
+                .expectNext(UserDto.fromDomain(appUser)).verifyComplete();
     }
 
     @Test

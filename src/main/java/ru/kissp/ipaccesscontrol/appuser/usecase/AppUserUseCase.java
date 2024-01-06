@@ -9,6 +9,7 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import ru.kissp.ipaccesscontrol.appuser.adapter.dto.CreateNewUserRequest;
 import ru.kissp.ipaccesscontrol.appuser.adapter.dto.UpdateUserRequest;
+import ru.kissp.ipaccesscontrol.appuser.adapter.dto.UserDto;
 import ru.kissp.ipaccesscontrol.appuser.domain.AppUser;
 import ru.kissp.ipaccesscontrol.appuser.port.AppUserPort;
 import ru.kissp.ipaccesscontrol.appuser.repository.AppUserRepository;
@@ -68,13 +69,13 @@ public class AppUserUseCase implements AppUserPort {
 
     @Override
     @CrudMethod
-    public Mono<AppUser> getUserById(String userId) {
-        return appUserRepository.findById(userId);
+    public Mono<UserDto> getUserById(String userId) {
+        return appUserRepository.findById(userId).map(UserDto::fromDomain);
     }
 
     @Override
     @CrudMethod
-    public Flux<AppUser> getAllUsers() {
-        return appUserRepository.findAll();
+    public Flux<UserDto> getAllUsers() {
+        return appUserRepository.findAll().map(UserDto::fromDomain);
     }
 }
