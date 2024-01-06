@@ -4,9 +4,12 @@ import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
+
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import ru.kissp.ipaccesscontrol.appuser.adapter.dto.CreateNewUserRequest;
 import ru.kissp.ipaccesscontrol.appuser.adapter.dto.UpdateUserRequest;
+import ru.kissp.ipaccesscontrol.appuser.adapter.dto.UserDto;
 import ru.kissp.ipaccesscontrol.appuser.domain.AppUser;
 import ru.kissp.ipaccesscontrol.appuser.port.AppUserPort;
 import ru.kissp.ipaccesscontrol.appuser.repository.AppUserRepository;
@@ -62,5 +65,17 @@ public class AppUserUseCase implements AppUserPort {
             .switchIfEmpty(Mono.error(new UserNotFoundException()))
             .flatMap(appUser -> appUserRepository.save(updateUserRequest.updateDomainUser(appUser)))
             .doOnError(UserNotFoundException.class::isInstance, err -> logger.error("User with id {} not found", userId));
+    }
+
+    @Override
+    @CrudMethod
+    public Mono<UserDto> getUserById(String userId) {
+        return appUserRepository.findById(userId).map(UserDto::fromDomain);
+    }
+
+    @Override
+    @CrudMethod
+    public Flux<UserDto> getAllUsers() {
+        return appUserRepository.findAll().map(UserDto::fromDomain);
     }
 }

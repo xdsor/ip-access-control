@@ -33,6 +33,8 @@ public class RouterConfiguration {
                         .PUT(ipAccessHandler::addNewIp)
                 )
                 .path("/users", builder -> builder
+                        .GET("/{id}", accept(APPLICATION_JSON), appUserHandler::getUserById)
+                        .GET(accept(APPLICATION_JSON), appUserHandler::getAllUsers)
                         .PATCH("/{id}", appUserHandler::updateUser)
                         .POST("/{id}/activate", appUserHandler::activateUser)
                         .PUT(appUserHandler::createNewUser)

@@ -13,8 +13,10 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.reactive.server.WebTestClient;
 import org.springframework.validation.beanvalidation.SpringValidatorAdapter;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import ru.kissp.ipaccesscontrol.appuser.adapter.dto.CreateNewUserRequest;
+import ru.kissp.ipaccesscontrol.appuser.adapter.dto.UserDto;
 import ru.kissp.ipaccesscontrol.appuser.port.AppUserPort;
 import ru.kissp.ipaccesscontrol.common.config.RouterConfiguration;
 import ru.kissp.ipaccesscontrol.ipaccess.adapter.handler.IpAccessHandler;
@@ -122,5 +124,61 @@ public class AppUserHandlerTest {
             .expectStatus().isBadRequest();
 
         verify(appUserPort, never()).updateUser(any(), any());
+    }
+
+    @Test
+    public void should_return_all_users() {
+        when(appUserPort.getAllUsers()).thenReturn(
+            Flux.just(
+                UserDto.fromDomain(TestDataGenerator.createAppUser()),
+                UserDto.fromDomain(TestDataGenerator.createAppUser())
+            )
+        );
+
+        webTestClient.get()
+            .uri("/users")
+            .accept(MediaType.APPLICATION_JSON)
+            .exchange()
+            .expectStatus().isOk()
+            .expectBodyList(UserDto.class)
+            .hasSize(2);
+    }
+
+    @Test
+    public void should_return_empty_users_list() {
+        when(appUserPort.getAllUsers()).thenReturn(Flux.empty());
+
+        webTestClient.get()
+            .uri("/users")
+            .accept(MediaType.APPLICATION_JSON)
+            .exchange()
+            .expectStatus().isOk()
+            .expectBodyList(UserDto.class)
+            .hasSize(0);
+    }
+
+    @Test
+    public void should_return_user_by_id() {
+        when(appUserPort.getUserById("someID")).thenReturn(
+            Mono.just(UserDto.fromDomain(TestDataGenerator.createAppUser()))
+        );
+
+        webTestClient.get()
+            .uri("/users/someID")
+            .accept(MediaType.APPLICATION_JSON)
+            .exchange()
+            .expectStatus().isOk()
+            .expectBody(UserDto.class);
+    }
+
+    @Test
+    public void should_return_404_if_user_does_not_exist_on_get_user_by_id() {
+        when(appUserPort.getUserById("someID")).thenReturn(Mono.empty());
+
+        webTestClient.get()
+            .uri("/users/someID")
+            .accept(MediaType.APPLICATION_JSON)
+            .exchange()
+            .expectStatus().isNotFound();
     }
 }

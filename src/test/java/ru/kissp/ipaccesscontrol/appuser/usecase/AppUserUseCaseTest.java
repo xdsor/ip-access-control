@@ -8,10 +8,12 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
 import ru.kissp.ipaccesscontrol.appuser.adapter.dto.CreateNewUserRequest;
 import ru.kissp.ipaccesscontrol.appuser.adapter.dto.UpdateUserRequest;
+import ru.kissp.ipaccesscontrol.appuser.adapter.dto.UserDto;
 import ru.kissp.ipaccesscontrol.appuser.domain.AppUser;
 import ru.kissp.ipaccesscontrol.appuser.repository.AppUserRepository;
 import ru.kissp.ipaccesscontrol.appuser.usecase.exceptions.UserAlreadyExistsException;
@@ -147,6 +149,47 @@ public class AppUserUseCaseTest {
         ).expectError(UserNotFoundException.class).verify();
 
         verify(appUserRepository, never()).save(any());
+    }
+
+    @Test
+    public void should_get_user_by_id() {
+        var appUser = TestDataGenerator.createAppUser();
+
+        when(appUserRepository.findById(appUser.getId())).thenReturn(Mono.just(appUser));
+
+        StepVerifier.create(appUserUseCase.getUserById(appUser.getId()))
+                .expectNext(UserDto.fromDomain(appUser)).verifyComplete();
+    }
+
+    @Test
+    public void should_return_empty_mono_on_get_user_by_id_if_user_does_not_exist() {
+        var appUser = TestDataGenerator.createAppUser();
+
+        when(appUserRepository.findById(appUser.getId())).thenReturn(Mono.empty());
+
+        StepVerifier.create(appUserUseCase.getUserById(appUser.getId()))
+            .expectNextCount(0).verifyComplete();
+    }
+
+    @Test
+    public void should_get_all_users() {
+
+        when(appUserRepository.findAll()).thenReturn(Flux.just(
+            TestDataGenerator.createAppUser(),
+            TestDataGenerator.createAppUser()
+        ));
+
+        StepVerifier.create(appUserUseCase.getAllUsers())
+            .expectNextCount(2).verifyComplete();
+    }
+
+    @Test
+    public void should_return_empty_flux_on_get_all_users_if_no_users() {
+
+        when(appUserRepository.findAll()).thenReturn(Flux.empty());
+
+        StepVerifier.create(appUserUseCase.getAllUsers())
+            .expectNextCount(0).verifyComplete();
     }
 
 }
