@@ -9,6 +9,7 @@ import org.springframework.web.reactive.function.server.ServerResponse;
 import ru.kissp.ipaccesscontrol.ipcheck.adapter.IpCheckHandler;
 import ru.kissp.ipaccesscontrol.ipaccess.adapter.handler.IpAccessHandler;
 import ru.kissp.ipaccesscontrol.appuser.adapter.handler.AppUserHandler;
+import ru.kissp.ipaccesscontrol.security.adapter.AuthenticationHandler;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 import static org.springframework.web.reactive.function.server.RequestPredicates.accept;
@@ -20,11 +21,13 @@ public class RouterConfiguration {
     public RouterFunction<ServerResponse> route(
             IpCheckHandler ipCheckHandler,
             IpAccessHandler ipAccessHandler,
-            AppUserHandler appUserHandler
+            AppUserHandler appUserHandler,
+            AuthenticationHandler authenticationHandler
     ) {
 
         return RouterFunctions
                 .route()
+                .POST("/login", authenticationHandler::login)
                 .POST("/check", ipCheckHandler::checkIfIpAllowed)
                 .GET("/activate/{telegramId}", ipAccessHandler::addIpForUserByTelegramId)
                 .path("/ip", builder -> builder

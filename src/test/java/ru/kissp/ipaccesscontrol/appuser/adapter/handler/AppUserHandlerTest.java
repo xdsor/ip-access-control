@@ -21,6 +21,7 @@ import ru.kissp.ipaccesscontrol.appuser.port.AppUserPort;
 import ru.kissp.ipaccesscontrol.common.config.RouterConfiguration;
 import ru.kissp.ipaccesscontrol.ipaccess.adapter.handler.IpAccessHandler;
 import ru.kissp.ipaccesscontrol.ipcheck.adapter.IpCheckHandler;
+import ru.kissp.ipaccesscontrol.security.adapter.AuthenticationHandler;
 import ru.kissp.ipaccesscontrol.utils.TestDataGenerator;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -38,7 +39,8 @@ public class AppUserHandlerTest {
     @Mock
     private AppUserPort appUserPort;
 
-    private AppUserHandler appUserHandler;
+    @Mock
+    private AuthenticationHandler authenticationHandler;
 
     private WebTestClient webTestClient;
 
@@ -46,14 +48,14 @@ public class AppUserHandlerTest {
 
     @BeforeEach
     public void setUp() {
-        appUserHandler = new AppUserHandler(
-            appUserPort,
-            new SpringValidatorAdapter(Validation.buildDefaultValidatorFactory().getValidator())
+        AppUserHandler appUserHandler = new AppUserHandler(
+                appUserPort,
+                new SpringValidatorAdapter(Validation.buildDefaultValidatorFactory().getValidator())
         );
 
         var router = new RouterConfiguration();
         this.webTestClient = WebTestClient.bindToRouterFunction(
-                router.route(ipCheckHandler, ipAccessHandler, appUserHandler))
+                router.route(ipCheckHandler, ipAccessHandler, appUserHandler, authenticationHandler))
                 .configureClient()
                 .build();
     }

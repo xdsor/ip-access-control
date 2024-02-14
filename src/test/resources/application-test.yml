@@ -1,0 +1,24 @@
+server:
+  port: 8000
+
+spring:
+  data:
+    mongodb:
+      authentication-database: admin
+      username: admin
+      password: admin
+      database: ipCheck
+      port: 27017
+      host: localhost
+
+integration:
+  telegram:
+    url: https://example.org
+    token: secret
+
+security:
+  cors:
+    allowed-origin: http://localhost:5173
+  user:
+    name: root
+    password: root
