@@ -25,6 +25,7 @@ import ru.kissp.ipaccesscontrol.ipaccess.port.IpAccessPort;
 import ru.kissp.ipaccesscontrol.ipaccess.usecase.exceptions.IpAccessNotFoundException;
 import ru.kissp.ipaccesscontrol.ipaccess.usecase.exceptions.UserHasActiveIpException;
 import ru.kissp.ipaccesscontrol.ipcheck.adapter.IpCheckHandler;
+import ru.kissp.ipaccesscontrol.security.adapter.AuthenticationHandler;
 import ru.kissp.ipaccesscontrol.utils.TestDataGenerator;
 
 import java.util.List;
@@ -44,6 +45,9 @@ public class IpAccessHandlerTest {
     @Mock
     private AppUserHandler appUserHandler;
 
+    @Mock
+    private AuthenticationHandler authenticationHandler;
+
     private WebTestClient webTestClient;
 
     private final ObjectMapper objectMapper = new ObjectMapper().registerModule(new JavaTimeModule());
@@ -58,7 +62,7 @@ public class IpAccessHandlerTest {
 
         var router = new RouterConfiguration();
         this.webTestClient = WebTestClient.bindToRouterFunction(
-                        router.route(ipCheckHandler, ipAccessHandler, appUserHandler))
+                        router.route(ipCheckHandler, ipAccessHandler, appUserHandler, authenticationHandler))
                 .configureClient()
                 .build();
     }

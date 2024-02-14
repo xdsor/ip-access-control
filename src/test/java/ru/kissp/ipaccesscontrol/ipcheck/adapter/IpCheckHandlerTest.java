@@ -15,6 +15,7 @@ import ru.kissp.ipaccesscontrol.appuser.adapter.handler.AppUserHandler;
 import ru.kissp.ipaccesscontrol.common.config.RouterConfiguration;
 import ru.kissp.ipaccesscontrol.ipaccess.adapter.handler.IpAccessHandler;
 import ru.kissp.ipaccesscontrol.ipcheck.port.IpCheckPort;
+import ru.kissp.ipaccesscontrol.security.adapter.AuthenticationHandler;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
@@ -34,6 +35,9 @@ public class IpCheckHandlerTest {
     private IpAccessHandler ipAccessHandler;
 
     @Mock
+    private AuthenticationHandler authenticationHandler;
+
+    @Mock
     private IpCheckPort ipCheckPort;
 
     private WebTestClient webTestClient;
@@ -42,7 +46,7 @@ public class IpCheckHandlerTest {
     public void setUp() {
         var router = new RouterConfiguration();
         this.webTestClient = WebTestClient.bindToRouterFunction(
-                        router.route(ipCheckHandler, ipAccessHandler, appUserHandler))
+                        router.route(ipCheckHandler, ipAccessHandler, appUserHandler, authenticationHandler))
                 .configureClient()
                 .build();
     }

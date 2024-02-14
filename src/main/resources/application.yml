@@ -1,15 +1,25 @@
+server:
+  port: ${IP_ACCESS_SERVER_PORT}
+
 spring:
   data:
     mongodb:
-      authentication-database: admin
-      username: admin
-      password: admin
-      database: ipCheck
-      port: 27017
-      host: localhost
+      authentication-database: ${DATABASE_AUTHENTICATION_DB}
+      username: ${DATABASE_USERNAME}
+      password: ${DATABASE_PASSWORD}
+      database: ${DATABASE_NAME}
+      port: ${DATABASE_PORT}
+      host: ${DATABASE_HOST}
 
 integration:
   telegram:
     url: https://api.telegram.org
-    token: secret
+    token: ${TELEGRAM_API_TOKEN}
+
+security:
+  cors:
+    allowed-origin: ${SECURITY_CORS_ALLOWED_ORIGIN}
+  user:
+    name: ${SECURITY_ADMIN_USERNAME}
+    password: ${SECURITY_ADMIN_PASSWORD}
 
